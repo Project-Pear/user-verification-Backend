@@ -16,4 +16,4 @@ app.use(morgan('dev'));
 app.use('/',router);
 
 
-app.listen(port, () => console.log(`app listening at http://localhost:${port}`));
+app.listen(port, "0.0.0.0",() => console.log(`Listening On ${port}...`));
