@@ -14,7 +14,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "dock-build":"docker build . -t tinyhouse",
+    "docker-push":"docker tag tinyhouse alexbenko/tinyhouse && docker push alexbenko/tinyhouse"
   },
   "repository": {
     "type": "git",
