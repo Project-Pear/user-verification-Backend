@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const db = require('../database/index.js');
 
+
 const router = require('./router.js')
 const app = express();
 const port = 80 ;
@@ -17,4 +18,4 @@ app.use(morgan('dev'));
 app.use('/',router);
 
 
-app.listen(port, "0.0.0.0",() => console.log(`Listening On ${port}...`));
+app.listen(port, "0.0.0.0",() => console.log(`Listening On http://localhost:${port}`));

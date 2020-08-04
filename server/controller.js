@@ -1,7 +1,16 @@
+const helpers = require('../database/helpers.js');
 
 const controller = {
   test: (req,res)=>{
-    res.status(200).send("Well ain't it the invisble cunt");
+    helpers.test()
+    .then((result)=>{
+      console.log(result)
+      res.status(200).send(result)
+    })
+    .catch((err)=>{
+      console.log(err)
+      res.status(404).send(err)
+    })
   }
 };
 
