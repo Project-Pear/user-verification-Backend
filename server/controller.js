@@ -4,7 +4,6 @@ const controller = {
   test: (req,res)=>{
     helpers.test()
     .then((result)=>{
-      console.log(result)
       res.status(200).send(result)
     })
     .catch((err)=>{
