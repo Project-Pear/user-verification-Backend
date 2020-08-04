@@ -1,8 +1,28 @@
 const db = require('./index.js');
 // let query = 'SELECT * FROM TEST;';
 const helpers = {
-  test(){
-    return new Promise ((resolve,reject)=>{
+  async test(){
+    let query = 'SELECT * FROM test';
+    try{
+      const result = await db.query(query);
+      console.log(result.rows)
+      return result.rows
+    } catch(err){
+      console.log(err.stack);
+      return null;
+    }
+
+
+
+  }
+
+};
+
+module.exports = helpers
+
+
+/*
+ return new Promise ((resolve,reject)=>{
       console.log('Querying...')
       let query = 'SELECT * FROM TEST;';
       db.query(query)
@@ -17,8 +37,4 @@ const helpers = {
     })
 
 
-  }
-
-};
-
-module.exports = helpers
+*/
