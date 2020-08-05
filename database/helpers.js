@@ -9,11 +9,21 @@ const helpers = {
       return result.rows
     } catch(err){
       console.log(err.stack);
-      return null;
+      return err.stack;
     }
+  },
+  async signUp(req){
+    let date = new Date();
+    let year = date.getFullYear();
+    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,score) VALUES('${req.email}','${req.pass}','${req.firstName}','${req.lastName}',${year},'${req.bDay}',${5})`
+    try{
+      let INSERT = await db.query(query);
+      return "Added Successfully To DB.."
 
-
-
+    } catch(err){
+      console.error("Error Signing Up: ",err.stack);
+      return err.stack;
+    }
   }
 
 };
