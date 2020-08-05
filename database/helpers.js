@@ -4,10 +4,9 @@ const helpers = {
   async signUp(req){
     let date = new Date();
     let year = date.getFullYear();
-    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,score) VALUES('${req.email}','${req.pass}','${req.firstName}','${req.lastName}',${year},'${req.bDay}',${5})`
+    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,lives,score) VALUES('${req.email}','${req.pass}','${req.firstName}','${req.lastName}',${year},'${req.bDay}','${req.lives}',${5})`
     try{
-      let [err, data] = await db.query(query);
-      console.log(INSERT)
+      let INSERT = await db.query(query);
       return Promise.resolve("Added Successfully To DB..")
 
     } catch(err){
