@@ -4,6 +4,7 @@ const controller = {
   signUp(req,res){
     helpers.signUp(req.body)
     .then((result)=>{
+      console.log('Successfully Added A new User to DB');
       res.status(201).send(result)
     })
     .catch((err)=>{
