@@ -1,9 +1,6 @@
 # Use the official image as a parent image.
 FROM node
 
-# Set the working directory.
-WORKDIR /client/dist
-
 # Copy the file from your host to your current location.
 COPY package.json .
 
