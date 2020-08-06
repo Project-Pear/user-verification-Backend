@@ -29,7 +29,7 @@ const helpers = {
       if(!password.verify(attemptedPassword,userInfo.pass)){
         return Promise.reject("WRONG PASSWORD");
       } else {
-        //once password is verified, sends all user data back except
+        //once password is verified, sends all user data back except the users password
         let data = {
           id:userInfo.id,
           email:userInfo.email,
