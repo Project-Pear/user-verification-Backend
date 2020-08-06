@@ -25,15 +25,26 @@ const helpers = {
     try{
       let login = await db.query(query);
       let userInfo = login.rows[0]
-      let verify = password.verify(attemptedPassword,userInfo.pass);
 
-      if(!verify){
+      if(!password.verify(attemptedPassword,userInfo.pass)){
         return Promise.reject("WRONG PASSWORD");
       } else {
-        return Promise.resolve(userInfo);
+        //once password is verified, sends all user data back except
+        let data = {
+          id:userInfo.id,
+          email:userInfo.email,
+          firstName:userInfo.firstName,
+          lastName:userInfo.lastName,
+          joined: userInfo.joined,
+          bDay: userInfo.bDay,
+          lives: userInfo.lives,
+          score: userInfo.score
+        };
+
+        return Promise.resolve(data);
       }
     }catch(err){
-      //cant login, most likely not a registerd email or connection issue
+      //cant connect to DB, most likely not a registerd email or connection issue
       console.log(err.stack)
       return Promise.reject(err.stack)
     }
