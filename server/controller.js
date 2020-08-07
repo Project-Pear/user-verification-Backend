@@ -14,7 +14,6 @@ const controller = {
   },
   login(req,res){
     let {email,password} = req.body;
-
     helpers.login(email,password)
     .then((data)=>{
       console.log('Successful Login!');
