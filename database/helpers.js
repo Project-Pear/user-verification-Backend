@@ -20,16 +20,16 @@ const helpers = {
   },
   async login(email,attemptedPassword){
     let query = `SELECT * FROM USERS WHERE email = '${email}';`;
-
     //login
     try{
       let login = await db.query(query);
-      let userInfo = login.rows[0]
+      let userInfo = login.rows[0];
+      let verify = password.verify(attemptedPassword,userInfo.pass);
 
-      if(!password.verify(attemptedPassword,userInfo.pass)){
+      if(!verify){
         return Promise.reject("WRONG PASSWORD");
       } else {
-        //once password is verified, sends all user data back except the users password
+        //once password is verified, sends all user data back except
         let data = {
           id:userInfo.id,
           email:userInfo.email,
@@ -46,7 +46,7 @@ const helpers = {
     }catch(err){
       //cant connect to DB, most likely not a registerd email or connection issue
       console.log(err.stack)
-      return Promise.reject(err.stack)
+      return Promise.reject("ERROR QUERYING")
     }
   },
   async changePassword(email,oldPassword,newPassword){
@@ -67,6 +67,15 @@ const helpers = {
     }catch(err){
       console.log(err.stack)
       return Promise.reject(err.stack)
+    }
+  },
+  async findById(id){
+    let query = `SELECT * FROM USERS WHERE id = ${id}`;
+    try{
+      let user = await db.query(query);
+      return Promise.resolve(user)
+    }catch(err){
+      return Promise.reject(err)
     }
   }
 
