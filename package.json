@@ -21,7 +21,7 @@
     "start-dev": "nodemon server/server.js",
     "start": "node server/server.js",
     "docker-build": "docker build . -t tinyhouse",
-    "docker-run": "docker run -p 80:80 tinyhouse",
+    "docker-run": "docker run -p 4242:4242 tinyhouse",
     "docker-push": "docker tag tinyhouse alexbenko/tinyhouse && docker push alexbenko/tinyhouse"
   },
   "repository": {
