@@ -9,7 +9,7 @@ const helpers = {
     let year = date.getFullYear();
     let hashed = password.hash(req.pass);
 
-    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,lives,score) VALUES('${req.email}','${hashed}','${req.firstName}','${req.lastName}',${year},'${req.bDay}','${req.lives}',${5})`;
+    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,lives,verified,score) VALUES('${req.email}','${hashed}','${req.firstName}','${req.lastName}',${year},'${req.bDay}','${req.lives}',${false},${5})`;
 
     try{
       let INSERT = await db.query(query);
@@ -41,6 +41,7 @@ const helpers = {
           joined: userInfo.joined,
           bDay: userInfo.bDay,
           lives: userInfo.lives,
+          verified: userInfo.verified,
           score: userInfo.score
         };
 
