@@ -1,6 +1,11 @@
 # Use the official image as a parent image.
 FROM node
 
+#Set server Url
+ENV URL="http://ec2-35-165-222-183.us-west-2.compute.amazonaws.com:4242"
+#Set Logging Mode
+ENV MODE='combined'
+
 # Copy the file from your host to your current location.
 COPY package.json .
 
