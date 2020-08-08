@@ -8,6 +8,7 @@ CREATE TABLE users(
   joined VARCHAR(200),
   bDay VARCHAR(200),
   lives VARCHAR(200),
+  verified BOOLEAN,
   score int
 );
 
