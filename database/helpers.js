@@ -20,6 +20,9 @@ const helpers = {
   },
   async login(email,attemptedPassword){
     let query = `SELECT * FROM USERS WHERE email = '${email}';`;
+    if(attemptedPassword === undefined){
+      return Promise.reject("NO PASSWORD")
+    }
     //login
     try{
       let login = await db.query(query);
@@ -46,7 +49,7 @@ const helpers = {
     }catch(err){
       //cant connect to DB, most likely not a registerd email or connection issue
       console.log(err.stack)
-      return Promise.reject("ERROR QUERYING")
+      return Promise.reject("ERROR QUERYING OR CONNECTING")
     }
   },
   async changePassword(email,oldPassword,newPassword){
