@@ -20,8 +20,13 @@ const helpers = {
   },
   async login(email,attemptedPassword){
     let query = `SELECT * FROM USERS WHERE email = '${email}';`;
-    if(attemptedPassword === undefined){
+    //error handling...
+    if(email === undefined && attemptedPassword === undefined){
+      return Promise.reject("NO PASSWORD AND USERNAME")
+    } else if(attemptedPassword === undefined){
       return Promise.reject("NO PASSWORD")
+    } else if(email === undefined){
+      return Promise.reject("NO USERNAME")
     }
     //login
     try{
