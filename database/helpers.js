@@ -5,11 +5,15 @@ const password = require('./password.js');
 const helpers = {
   //signup helpers
   async signUp(req){
-    let date = new Date();
-    let year = date.getFullYear();
-    let hashed = password.hash(req.pass);
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1; //months from 1-12
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
 
-    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,lives,verified,score) VALUES('${req.email}','${hashed}','${req.firstName}','${req.lastName}',${year},'${req.bDay}','${req.lives}',${false},${5})`;
+    newdate = month + "/" + day + "/" + year;
+    let hashed = await password.hash(req.pass);
+
+    let query = `INSERT INTO users(email,pass,firstName,lastName,joined,bDay,lives,verified,score) VALUES('${req.email}','${hashed}','${req.firstName}','${req.lastName}',${newdate},'${req.bDay}','${req.lives}',${false},${5})`;
 
     try{
       let INSERT = await db.query(query);
@@ -19,20 +23,22 @@ const helpers = {
     }
   },
   async login(email,attemptedPassword){
-    let query = `SELECT * FROM USERS WHERE email = '${email}';`;
     //error handling...
     if(email === undefined && attemptedPassword === undefined){
-      return Promise.reject("NO PASSWORD AND USERNAME")
-    } else if(attemptedPassword === undefined){
+      return Promise.reject("NO PASSWORD AND EMAIL")
+    }else if(attemptedPassword === undefined){
       return Promise.reject("NO PASSWORD")
-    } else if(email === undefined){
+    }else if(email === undefined){
       return Promise.reject("NO USERNAME")
     }
+
+    let query = `SELECT * FROM USERS WHERE email = '${email}';`;
+
     //login
     try{
       let login = await db.query(query);
       let userInfo = login.rows[0];
-      let verify = password.verify(attemptedPassword,userInfo.pass);
+      let verify = await password.verify(attemptedPassword,userInfo.pass);
 
       if(!verify){
         return Promise.reject("WRONG PASSWORD");
@@ -54,7 +60,6 @@ const helpers = {
       }
     }catch(err){
       //cant connect to DB, most likely not a registerd email or connection issue
-      console.log(err.stack)
       return Promise.reject("ERROR QUERYING OR CONNECTING")
     }
   },
