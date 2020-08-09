@@ -19,7 +19,8 @@ const controller = {
     })
     .catch((err)=>{
       if(err.includes("duplicate")){
-        console.log("Duplicate Email Attempt: " + req.body.email + ` -- ${timeStamp()}`)
+        console.log("Duplicate Email Attempt: " + req.body.email + ` -- ${timeStamp()} from iP:${req.connection.remoteAddress}`);
+
         res.status(420).send("Duplicate Email");
         return;
       }
@@ -34,7 +35,7 @@ const controller = {
       res.status(202).send(data);
     })
     .catch((err)=>{
-      console.log("Error Logging In: " + err + ` -- ${timeStamp()}`);
+      console.log("Invalid Log In: " + err + ` -- ${timeStamp()} from iP:${req.connection.remoteAddress}`);
       res.status(402).send(err)
     })
   },
