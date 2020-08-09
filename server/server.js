@@ -18,6 +18,4 @@ app.use(morgan(mode));
 
 app.use('/',router);
 
-
-
 app.listen(port,() => console.log(`Listening On ${host}`));
