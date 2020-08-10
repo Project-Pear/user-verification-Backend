@@ -7,9 +7,6 @@ FROM node
 #Set server Url
 ENV URL="http://ec2-35-165-222-183.us-west-2.compute.amazonaws.com:4242"
 
-#Set Logging Mode for morgan, gives more details than dev mode
-ENV MODE='combined'
-
 ###Process Environment Variables#######################################
 
 # Copy the file from your host to your current location.
