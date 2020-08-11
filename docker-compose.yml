@@ -1,0 +1,21 @@
+version: "3"
+services:
+  server:
+    restart: always
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "4242:4242"
+    command:
+      npm run start
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - '5436:5432'
+    restart: always
+    environment:
+      POSTGRES_USER: alex
+      POSTGRES_PASSWORD: phelps521
+      POSTGRES_DB: tinyhouse
