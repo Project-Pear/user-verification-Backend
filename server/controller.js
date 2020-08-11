@@ -1,13 +1,7 @@
 const helpers = require('../database/helpers.js');
 
 var timeStamp = ()=> {
-  let currentdate = new Date();
-  let timeStamp = (currentdate.getMonth()+1)  +  "/"
-          + currentdate.getDate() + "/"
-          + currentdate.getFullYear() + " @ "
-          + currentdate.getHours() + ":"
-          + currentdate.getMinutes() + ":"
-  return timeStamp
+  return Date();
 }
 
 const controller = {
@@ -19,11 +13,11 @@ const controller = {
     })
     .catch((err)=>{
       if(err.includes("duplicate")){
-        console.log("Duplicate Email Attempt: " + req.body.email + ` -- ${timeStamp()} from iP:${req.connection.remoteAddress}`);
-
+        console.log("Duplicate Email Attempt: " + req.body.email + ` -- ${timeStamp()} -- from iP:${req.connection.remoteAddress}`);
         res.status(420).send("Duplicate Email");
         return;
       }
+      console.log(`Error Signing Up: ${err}`)
       res.status(401).send(err);
     })
   },
@@ -31,11 +25,11 @@ const controller = {
     let {email,pass} = req.body;
     helpers.login(email,pass)
     .then((data)=>{
-      console.log('Successful Login! -- ' + req.body.email);
+      console.log('Successful Login! -- ' + req.body.email + ' -- ' + timeStamp());
       res.status(202).send(data);
     })
     .catch((err)=>{
-      console.log("Invalid Log In: " + err + ` -- ${timeStamp()} from iP:${req.connection.remoteAddress}`);
+      console.log("Invalid Log In: " + err + ` -- ${timeStamp()} -- For Account: ${req.body.email} -- From iP:${req.connection.remoteAddress}`);
       res.status(402).send(err)
     })
   },
