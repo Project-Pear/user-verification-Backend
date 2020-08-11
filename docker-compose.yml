@@ -13,7 +13,7 @@ services:
   postgres:
     image: postgres:latest
     ports:
-      - '5436:5432'
+      - '5432:5432'
     restart: always
     environment:
       POSTGRES_USER: alex
