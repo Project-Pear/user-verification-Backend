@@ -17,5 +17,5 @@ services:
     restart: always
     environment:
       POSTGRES_USER: alex
-      POSTGRES_PASSWORD: phelps521
+      POSTGRES_PASSWORD: bumeo123
       POSTGRES_DB: tinyhouse
