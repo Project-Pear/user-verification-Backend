@@ -20,7 +20,9 @@
     "start": "node server/server.js",
     "docker-build": "docker build . -t tinyhouse",
     "docker-run": "docker run -p 4242:4242 tinyhouse",
-    "docker-push": "docker tag tinyhouse alexbenko/tinyhouse && docker push alexbenko/tinyhouse"
+    "docker-push": "npm run docker-build && docker tag tinyhouse alexbenko/tinyhouse && docker push alexbenko/tinyhouse",
+    "compose-new":"npm run docker-push && docker-compose pull && docker-compose up",
+    "compose":"docker-compose up"
   },
   "repository": {
     "type": "git",
