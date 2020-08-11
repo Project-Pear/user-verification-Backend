@@ -5,6 +5,9 @@ const password = require('./password.js');
 const helpers = {
   //signup helpers
   async signUp(req){
+    if(req.pass === undefined){
+      return Promise.reject("No password Given")
+    }
     let dateObj = new Date();
     let month = dateObj.getUTCMonth() + 1; //months from 1-12
     let day = dateObj.getUTCDate();
