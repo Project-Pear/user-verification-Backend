@@ -11,6 +11,7 @@ ENV URL="http://ec2-35-165-222-183.us-west-2.compute.amazonaws.com:4242"
 
 # Copy the file from your host to your current location.
 COPY package.json .
+COPY package-lock.json .
 
 # Run the command inside your image filesystem.
 RUN npm install
