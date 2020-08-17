@@ -22,7 +22,7 @@ const helpers = {
       let INSERT = await db.query(query);
       return Promise.resolve("Added Successfully To DB..");
     } catch(err){
-      return Promise.reject(err.stack);
+      return Promise.reject(err);
     }
   },
   async login(email,attemptedPassword){
